@@ -1,0 +1,9 @@
+messengerserver/API/BaseController.class
+messengerserver/Message.class
+messengerserver/API/Registration.class
+messengerserver/Chat.class
+messengerserver/UniqueHashGenerator.class
+messengerserver/Application.class
+messengerserver/db/DbHandler.class
+messengerserver/API/BaseResponse.class
+messengerserver/User.class

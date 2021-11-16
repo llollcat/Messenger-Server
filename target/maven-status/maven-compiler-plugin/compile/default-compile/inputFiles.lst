@@ -1,0 +1,9 @@
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/Message.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/API/BaseController.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/API/BaseResponse.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/Application.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/UniqueHashGenerator.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/Chat.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/User.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/db/DbHandler.java
+/home/tiramisu/IdeaProjects/Messenger/src/main/java/messengerserver/API/Registration.java
