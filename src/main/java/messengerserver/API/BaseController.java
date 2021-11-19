@@ -1,3 +1,4 @@
+/*
 package messengerserver.API;
 
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,8 @@ public class BaseController {
     }
 
 
-    /*@PostMapping("/pay")
+    */
+/*@PostMapping("/pay")
     public BaseResponse pay(@RequestParam(value = "key") String key, @RequestBody PaymentRequest request) {
         final BaseResponse response;
         if (sharedKey.equalsIgnoreCase(key)) {
@@ -31,5 +33,6 @@ public class BaseController {
             response = new BaseResponse(ERROR_STATUS, AUTH_FAILURE);
         }
         return response;
-    }*/
-}
+    }*//*
+
+}*/

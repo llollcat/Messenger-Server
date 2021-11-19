@@ -1,5 +1,6 @@
 package messengerserver.API;
 
+import messengerserver.Application;
 import messengerserver.db.*;
 import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("/register")
 public class Registration {
-    private static final String SUCCESS_STATUS = "success";
+
 
 
     @PostMapping
@@ -17,14 +18,14 @@ public class Registration {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
 
-            System.out.println(dbHandler.registarteUser(login, passwd));
+            String result = dbHandler.registarteUser(login, passwd);
+            if (result.equals(Application.OK_CODE))
+                return new BaseResponse(Application.SUCCESS_STATUS, 200, dbHandler.getUserByLogin(login).user_token);
+            else
+                return new BaseResponse(result, 409, "");
         } catch (SQLException e) {
-            e.printStackTrace();
+            return new BaseResponse(Application.FAILED_STATUS, 500, "");
         }
-
-
-
-        return new BaseResponse(SUCCESS_STATUS, 1);
     }
 
 

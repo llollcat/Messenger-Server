@@ -1,26 +1,26 @@
 package messengerserver.API;
 
-public class BaseResponse {
+public class ChatResponse{
 
     private final String status;
     private final Integer code;
-    private final String token;
+    private final String chat_id;
 
-    public BaseResponse(String status, Integer code, String token) {
+    public ChatResponse(String status, Integer code, String chat_id) {
         this.status = status;
         this.code = code;
-        this.token = token;
+        this.chat_id = chat_id;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public String getToken() {
-        return token;
-    }
-
     public Integer getCode() {
         return code;
+    }
+
+    public String getChat_id() {
+        return chat_id;
     }
 }

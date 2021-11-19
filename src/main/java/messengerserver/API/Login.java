@@ -1,5 +1,6 @@
 package messengerserver.API;
 
+        import messengerserver.Application;
         import messengerserver.UniqueHashGenerator;
         import messengerserver.User;
         import messengerserver.db.*;
@@ -11,7 +12,6 @@ package messengerserver.API;
 @RestController
 @RequestMapping("/login")
 public class Login {
-    private static final String SUCCESS_STATUS = "success";
 
 
     @PostMapping
@@ -19,23 +19,22 @@ public class Login {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByLogin(login);
-
+            if (user == null)
+                return new BaseResponse("incorrect login", 401, "");
             try {
                 if (user.passwd.equals(UniqueHashGenerator.getHash(passwd))) {
-                    System.out.println("Logged");
+                    return new BaseResponse(Application.SUCCESS_STATUS, 200, user.user_token);
                 } else {
-                    System.out.println("passwd inc");
+                    return new BaseResponse(Application.FAILED_STATUS, 401, "");
                 }
             } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
+                return new BaseResponse(Application.FAILED_STATUS, 500, "");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return new BaseResponse(Application.FAILED_STATUS, 500, "");
         }
 
 
-
-        return new BaseResponse(SUCCESS_STATUS, 1);
     }
 
 

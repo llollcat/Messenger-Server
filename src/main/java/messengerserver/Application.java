@@ -11,7 +11,8 @@ public class Application {
 
 
     public final static String OK_CODE= "OK!";
-
+    public static final String SUCCESS_STATUS = "success";
+    public static final String FAILED_STATUS = "failed";
 
     public static void main(String[] args) {
 
