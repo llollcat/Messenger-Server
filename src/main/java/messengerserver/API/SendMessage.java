@@ -30,7 +30,7 @@ public class SendMessage {
                 return new BaseResponse("chat id error", 409, "");
 
             if (chat.participants.contains(user.login))
-                dbHandler.SendMessage(chat, new Message(message, "poka tut pusto", new Timestamp(System.currentTimeMillis()).toString(), user.login));
+                dbHandler.SendMessage(chat, new Message(message, "poka tut pusto", DbHandler.GetTimestamp(), user.login));
             return new BaseResponse(Application.SUCCESS_STATUS, 200, user_token);
 
         } catch (SQLException e) {

@@ -1,19 +1,25 @@
 package messengerserver.db;
 
 import messengerserver.*;
+import messengerserver.API.ChatsUpdates;
 import org.sqlite.JDBC;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
 
 
 public class DbHandler {
+    public static long GetTimestamp(){
+        return System.currentTimeMillis() / 1000L;
+
+    }
+
+
     private static final String SLQ_LITE_DB_PATH = "jdbc:sqlite:main.db";
     private static DbHandler instance = null;
 
@@ -159,7 +165,7 @@ public class DbHandler {
 
         try (PreparedStatement statement = this.connection.prepareStatement("INSERT INTO CHAT_" + chat.chat_messages_id +
                 "(`timestamps`, `who_wrote`, `message_text`, `image` ) VALUES(?, ?, ?, ?)")) {
-            statement.setObject(1, new Timestamp(System.currentTimeMillis()).toString());
+            statement.setObject(1, GetTimestamp());
             statement.setObject(2, message.who_wrote);
             statement.setObject(3, message.text);
             statement.setObject(4, message.image);
@@ -167,6 +173,48 @@ public class DbHandler {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+
+        for (String p: chat.participants) {
+
+            Boolean mention = null;
+
+            try (PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM UPDATES WHERE `login` = ? AND `chat_id` = ?")) {
+                statement.setObject(1, p);
+                statement.setObject(2, chat.chat_messages_id);
+
+                mention = statement.executeQuery().getBoolean("has_mention");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try (PreparedStatement statement = this.connection.prepareStatement( "DELETE FROM UPDATES WHERE `login` = ? AND `chat_id` = ?")){
+                statement.setObject(1, p);
+                statement.setObject(2, chat.chat_messages_id);
+                statement.execute();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+            try (PreparedStatement statement = this.connection.prepareStatement("INSERT INTO UPDATES(`login`, `chat_id`, `has_mention`) VALUES(?, ?, ?)")) {
+                statement.setObject(1, p);
+                statement.setObject(2, chat.chat_messages_id);
+                Pattern pattern = Pattern.compile("(?<=@)"+p);
+                Matcher matcher  =pattern.matcher(message.text);
+                if (Boolean.TRUE.equals(mention)){
+                    statement.setObject(3, mention);
+                } else {
+                    statement.setObject(3, matcher.find());
+                }
+                statement.execute();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -205,7 +253,7 @@ public class DbHandler {
 
             ArrayList<Message> messages= new ArrayList<Message>();
             while (result.next()) {
-                messages.add(new Message(result.getString("message_text"),result.getString("image"), result.getString("timestamps"), result.getString("who_wrote")));
+                messages.add(new Message(result.getString("message_text"),result.getString("image"), result.getLong("timestamps"), result.getString("who_wrote")));
             }
             return new Chat(messages,participants  ,id);
 
@@ -231,7 +279,30 @@ public class DbHandler {
 
 
 
+    public ChatsUpdates getUpdates(User user){
+        Map<String, Boolean> chats_ids = new HashMap<>();
 
+        try (PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM UPDATES WHERE `login` = ?")) {
+
+            statement.setObject(1, user.login);
+            ResultSet result =  statement.executeQuery();
+
+
+            while (result.next()) {
+                chats_ids.put(result.getString("chat_id"),result.getBoolean("has_mention"));
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            return null;
+
+        }
+        return new ChatsUpdates(user.login, chats_ids);
+
+
+
+    }
 
 
 
