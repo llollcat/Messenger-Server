@@ -1,22 +1,18 @@
 package messengerserver;
 
 
-
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
 public class UniqueHashGenerator {
-
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);
@@ -26,11 +22,9 @@ public class UniqueHashGenerator {
 
 
     public static String getNewUserToken() {
-
-           return UUID.randomUUID().toString();
-
-
+        return UUID.randomUUID().toString();
     }
+
 
     public static String getHash(String string) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -40,8 +34,7 @@ public class UniqueHashGenerator {
     }
 
 
-
-    public static String getChatId()  {
+    public static String getChatId() {
         int leftLimit = 97;
         int rightLimit = 122;
         int targetStringLength = 16;
@@ -55,8 +48,4 @@ public class UniqueHashGenerator {
         return buffer.toString();
 
     }
-
-
-
-
 }

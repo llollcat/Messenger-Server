@@ -1,4 +1,6 @@
-package messengerserver.API;
+package messengerserver.API.Response;
+
+import messengerserver.ChatsUpdates;
 
 import java.util.Map;
 
@@ -6,13 +8,13 @@ public class GetUpdatesResponse {
     private final String status;
     private final Integer code;
     private final String updatesOwner;
-    private final Map<String, Boolean> chats_ids;
+    private final Map<String, Boolean> chatsIds;
 
-    public  GetUpdatesResponse(String status, Integer code, ChatsUpdates updates){
+    public GetUpdatesResponse(String status, Integer code, ChatsUpdates updates) {
         this.status = status;
         this.code = code;
         this.updatesOwner = updates.updatesOwner;
-        this.chats_ids = updates.chats_ids;
+        this.chatsIds = updates.chatsIds;
 
 
     }
@@ -30,7 +32,7 @@ public class GetUpdatesResponse {
         return updatesOwner;
     }
 
-    public Map<String, Boolean> getChats_ids() {
-        return chats_ids;
+    public Map<String, Boolean> getChatsIds() {
+        return chatsIds;
     }
 }

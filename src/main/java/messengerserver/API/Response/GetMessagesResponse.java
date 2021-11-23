@@ -1,8 +1,7 @@
-package messengerserver.API;
+package messengerserver.API.Response;
 
 import messengerserver.Message;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetMessagesResponse {
