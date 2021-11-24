@@ -1,9 +1,9 @@
-package messengerserver.API.Request;
+package messengerServer.API.Request;
 
 
-import messengerserver.*;
-import messengerserver.API.Response.BaseResponse;
-import messengerserver.DbHandler;
+import messengerServer.*;
+import messengerServer.API.Response.BaseResponse;
+import messengerServer.DbHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

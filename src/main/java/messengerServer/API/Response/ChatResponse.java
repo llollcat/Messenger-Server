@@ -1,4 +1,4 @@
-package messengerserver.API.Response;
+package messengerServer.API.Response;
 
 public class ChatResponse{
 

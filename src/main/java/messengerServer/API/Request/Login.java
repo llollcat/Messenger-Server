@@ -1,10 +1,10 @@
-package messengerserver.API.Request;
+package messengerServer.API.Request;
 
-import messengerserver.API.Response.AuthorizationResponse;
-import messengerserver.Application;
-import messengerserver.DbHandler;
-import messengerserver.UniqueHashGenerator;
-import messengerserver.User;
+import messengerServer.API.Response.AuthorizationResponse;
+import messengerServer.Application;
+import messengerServer.DbHandler;
+import messengerServer.UniqueHashGenerator;
+import messengerServer.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;

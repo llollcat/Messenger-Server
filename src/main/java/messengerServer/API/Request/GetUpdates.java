@@ -1,10 +1,10 @@
 
-package messengerserver.API.Request;
+package messengerServer.API.Request;
 
-import messengerserver.*;
-import messengerserver.ChatsUpdates;
-import messengerserver.API.Response.GetUpdatesResponse;
-import messengerserver.DbHandler;
+import messengerServer.*;
+import messengerServer.ChatsUpdates;
+import messengerServer.API.Response.GetUpdatesResponse;
+import messengerServer.DbHandler;
 import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 

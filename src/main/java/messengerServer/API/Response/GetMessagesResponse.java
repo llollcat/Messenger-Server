@@ -1,6 +1,6 @@
-package messengerserver.API.Response;
+package messengerServer.API.Response;
 
-import messengerserver.Message;
+import messengerServer.Message;
 
 import java.util.List;
 

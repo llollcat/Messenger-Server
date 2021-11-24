@@ -1,4 +1,4 @@
-package messengerserver;
+package messengerServer;
 
 import java.util.List;
 

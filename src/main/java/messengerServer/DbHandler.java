@@ -1,4 +1,4 @@
-package messengerserver;
+package messengerServer;
 
 import org.sqlite.JDBC;
 
@@ -99,7 +99,7 @@ public class DbHandler {
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-            statement.setObject(3, messengerserver.UniqueHashGenerator.getNewUserToken());
+            statement.setObject(3, messengerServer.UniqueHashGenerator.getNewUserToken());
             statement.execute();
         } catch (SQLException e) {
             if (e.getErrorCode() == 19)

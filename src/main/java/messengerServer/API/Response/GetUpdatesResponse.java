@@ -1,6 +1,6 @@
-package messengerserver.API.Response;
+package messengerServer.API.Response;
 
-import messengerserver.ChatsUpdates;
+import messengerServer.ChatsUpdates;
 
 import java.util.Map;
 

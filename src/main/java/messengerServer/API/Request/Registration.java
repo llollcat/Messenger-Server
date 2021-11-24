@@ -1,8 +1,8 @@
-package messengerserver.API.Request;
+package messengerServer.API.Request;
 
-import messengerserver.API.Response.AuthorizationResponse;
-import messengerserver.Application;
-import messengerserver.DbHandler;
+import messengerServer.API.Response.AuthorizationResponse;
+import messengerServer.Application;
+import messengerServer.DbHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;

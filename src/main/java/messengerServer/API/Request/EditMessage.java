@@ -1,24 +1,20 @@
+package messengerServer.API.Request;
 
-package messengerserver.API.Request;
-
-import messengerserver.*;
-import messengerserver.API.Response.BaseResponse;
-import messengerserver.DbHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import messengerServer.*;
+import messengerServer.API.Response.BaseResponse;
+import messengerServer.DbHandler;
+import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/sendMessage")
-public class SendMessage {
+@RequestMapping("/editMessage")
+public class EditMessage {
 
 
-    @PostMapping
+    @GetMapping
     public BaseResponse doTask(@RequestParam(name = "userToken") String userToken, @RequestParam(name = "chatId") String chatId,
-                               @RequestParam(name = "message") String message, @RequestParam(name = "imageUrl") String imageUrl) {
+                               @RequestParam(name = "timestamp") Integer timestamp, @RequestParam(name = "new_text") String text,
+                               @RequestParam(name = "new_image") String image) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByToken(userToken);
@@ -29,15 +25,14 @@ public class SendMessage {
             if (chat == null)
                 return new BaseResponse("chat id error", 409);
 
-            if (chat.participants.contains(user.login))
-                dbHandler.SendMessage(chat, new Message(message, imageUrl, DbHandler.GetTimestamp(), user.login));
+            dbHandler.EditMessage(chat, user, timestamp, text, image);
+
             return new BaseResponse(Application.SUCCESS_STATUS, 200);
 
         } catch (SQLException e) {
             e.printStackTrace();
             return new BaseResponse(Application.FAILED_STATUS, 500);
         }
-
 
     }
 
