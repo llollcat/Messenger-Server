@@ -17,7 +17,7 @@ public class SendMessage {
 
 
     @PostMapping
-    public BaseResponse doTask(@RequestParam(name = "userToken") String userToken, @RequestParam(name = "chatId") String chatId,
+    public BaseResponse doTask(@RequestParam(name = "token") String userToken, @RequestParam(name = "chatId") String chatId,
                                @RequestParam(name = "message") String message, @RequestParam(name = "imageUrl") String imageUrl) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();

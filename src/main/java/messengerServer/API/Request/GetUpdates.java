@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class GetUpdates {
 
 
-    @GetMapping
+    @PostMapping
     public GetUpdatesResponse doTask(@RequestParam(name = "token") String user_token) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();

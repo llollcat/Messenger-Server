@@ -19,7 +19,7 @@ public class CreateChat {
 
 
     @PostMapping
-    public ChatResponse doTask(@RequestParam(name = "userToken") String userToken) {
+    public ChatResponse doTask(@RequestParam(name = "token") String userToken) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByToken(userToken);

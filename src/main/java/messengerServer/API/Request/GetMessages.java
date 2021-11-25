@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class GetMessages {
 
 
-    @GetMapping
-    public GetMessagesResponse doTask(@RequestParam(name = "token") String user_token, @RequestParam(name = "chat_id") String chat_id) {
+    @PostMapping
+    public GetMessagesResponse doTask(@RequestParam(name = "token") String user_token, @RequestParam(name = "chatId") String chat_id) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByToken(user_token);

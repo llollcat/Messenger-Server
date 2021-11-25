@@ -81,7 +81,7 @@ public class DbHandler {
                     chats.add(Integer.parseInt(i));
                 }
             }
-            return new User(resultSet.getString("login"), resultSet.getString("passwd"), resultSet.getString("userToken"), resultSet.getString("avatar"), chats);
+            return new User(resultSet.getString("login"), resultSet.getString("passwd"), resultSet.getString("user_token"), resultSet.getString("avatar"), chats);
 
 
         } catch (SQLException e) {
@@ -124,7 +124,7 @@ public class DbHandler {
             return null;
         }
 
-        try (PreparedStatement statement = this.connection.prepareStatement("CREATE TABLE CHAT_" + id + "(timestamp INTEGER NOT NULL, who_wrote TEXT NOT NULL, message_text TEXT, image TEXT);")) {
+        try (PreparedStatement statement = this.connection.prepareStatement("CREATE TABLE CHAT_" + id + "(timestamp TEXT NOT NULL, who_wrote TEXT NOT NULL, message_text TEXT, image TEXT);")) {
             statement.execute();
 
         } catch (SQLException e) {
@@ -262,7 +262,7 @@ public class DbHandler {
     }
 
 
-    public void EditMessage(Chat chat, User user, Integer timestamp, String newText, String newImage) {
+    public void EditMessage(Chat chat, User user, String timestamp, String newText, String newImage) {
         try (PreparedStatement statement = this.connection.prepareStatement("UPDATE CHAT_" + chat.chatMessagesId +
                 " SET message_text =?, image = ? WHERE timestamp = ? AND who_wrote = ?")) {
             statement.setObject(1, newText);

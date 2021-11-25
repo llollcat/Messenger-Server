@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class GetAvatar {
 
 
-    @GetMapping
+    @PostMapping
     public AvatarResponse doTask(@RequestParam(name = "login") String login) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();

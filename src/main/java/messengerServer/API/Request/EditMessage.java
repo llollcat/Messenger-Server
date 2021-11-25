@@ -11,10 +11,10 @@ import java.sql.SQLException;
 public class EditMessage {
 
 
-    @GetMapping
-    public BaseResponse doTask(@RequestParam(name = "userToken") String userToken, @RequestParam(name = "chatId") String chatId,
-                               @RequestParam(name = "timestamp") Integer timestamp, @RequestParam(name = "new_text") String text,
-                               @RequestParam(name = "new_image") String image) {
+    @PostMapping
+    public BaseResponse doTask(@RequestParam(name = "token") String userToken, @RequestParam(name = "chatId") String chatId,
+                               @RequestParam(name = "timestamp") String timestamp, @RequestParam(name = "newText") String text,
+                               @RequestParam(name = "newImage") String image) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByToken(userToken);

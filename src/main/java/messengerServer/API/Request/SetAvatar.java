@@ -17,7 +17,7 @@ public class SetAvatar {
 
 
     @PostMapping
-    public BaseResponse doTask(@RequestParam(name = "userToken") String userToken, @RequestParam(name = "avatarUrl") String avatarUrl) {
+    public BaseResponse doTask(@RequestParam(name = "token") String userToken, @RequestParam(name = "avatarUrl") String avatarUrl) {
         try {
             DbHandler dbHandler = DbHandler.getInstance();
             User user = dbHandler.getUserByToken(userToken);
